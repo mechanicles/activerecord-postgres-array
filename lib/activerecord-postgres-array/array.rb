@@ -2,7 +2,7 @@ class Array
   # Generates a single quoted postgres array string format. This is the format used
   # to insert or update stuff in the database.
   def to_postgres_array(omit_quotes = false)
-    result = "#{omit_quotes ? '' : "'" }{"
+    result = "{"
 
     result << collect do |value|
       if value.is_a?(Array)
@@ -20,7 +20,7 @@ class Array
       end
     end.join(",")
 
-    result << "}#{omit_quotes ? '' : "'" }"
+    result << "}"
   end
 
   # If the method from_postgres_array is called in an Array, it just returns self.
